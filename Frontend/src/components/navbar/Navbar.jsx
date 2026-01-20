@@ -12,7 +12,6 @@ import { logout } from "../../actions/authActions";
 import { selectUser } from "../../reducer/authReducer";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
-import { set } from "mongoose";
 
 const Navbar = () => {
   const currentUser = useSelector(selectUser);
