@@ -1,4 +1,10 @@
 node_modules
 npm-debug.log
-node_modules
-npm-debug.log
+
+# Environment variables (NEVER commit these)
+.env
+.env.local
+.env.production
+
+# Test environment (if contains secrets)
+spec/.env.test
