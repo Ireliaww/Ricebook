@@ -2,6 +2,13 @@
 
 A full-stack social media application built with the MERN stack (MongoDB, Express.js, React, Node.js). Ricebook allows users to share posts, follow other users, comment on content, and manage their profiles.
 
+## Live Demo
+
+| Service | URL |
+|---------|-----|
+| **Frontend** | https://ricebook-frontend.vercel.app |
+| **Backend API** | https://ricebook.onrender.com |
+
 ## Features
 
 - **User Authentication**: Register and login with email/password or Google OAuth via Firebase
@@ -70,13 +77,23 @@ Ricebook/
 
 ### Environment Variables
 
+#### Backend
 Create a `.env` file in the `Backend` directory:
 
 ```env
+NODE_ENV=development
+PORT=3001
 MONGODB_URI=your_mongodb_connection_string
 CLOUDINARY_URL=cloudinary://api_key:api_secret@cloud_name
-PORT=3001
-NODE_ENV=development
+SESSION_SECRET=your_secure_session_secret
+FRONTEND_URL=http://localhost:3000
+```
+
+#### Frontend
+Create a `.env.local` file in the `Frontend` directory:
+
+```env
+REACT_APP_API_BASE_URL=http://localhost:3001
 ```
 
 ### Installation
@@ -172,15 +189,47 @@ Tests include:
 
 ## Deployment
 
-### Frontend
-The frontend can be deployed to Surge:
+### Frontend (Vercel)
+
+1. Install Vercel CLI:
 ```bash
-cd Frontend
-npm run deploy
+npm install -g vercel
 ```
 
-### Backend
-The backend is configured for Heroku deployment with the included `Procfile`.
+2. Deploy to Vercel:
+```bash
+cd Frontend
+vercel --prod
+```
+
+3. Set environment variable in Vercel dashboard:
+   - `REACT_APP_API_BASE_URL` = your backend URL (e.g., `https://ricebook.onrender.com`)
+
+### Backend (Render)
+
+1. Create a new Web Service on [Render Dashboard](https://dashboard.render.com)
+2. Connect your GitHub repository
+3. Configure the service:
+   - **Root Directory**: `Backend`
+   - **Build Command**: `npm install`
+   - **Start Command**: `node index.js`
+   - **Instance Type**: Free
+
+4. Set environment variables in Render dashboard:
+   - `NODE_ENV` = `production`
+   - `PORT` = `3001`
+   - `MONGODB_URI` = your MongoDB Atlas connection string
+   - `CLOUDINARY_URL` = your Cloudinary URL
+   - `SESSION_SECRET` = a secure random string
+   - `FRONTEND_URL` = your Vercel frontend URL
+
+### Alternative: Surge (Frontend)
+```bash
+cd Frontend
+npm run deploy:surge
+```
+
+> **Note**: Render free tier services spin down after 15 minutes of inactivity. The first request after sleep may take 30-60 seconds.
 
 ## Contributing
 
