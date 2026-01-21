@@ -27,11 +27,11 @@ app.set("trust proxy", 1);
 // Configure session middleware
 app.use(
   session({
-    secret: "rice university", // Replace this with a secure secret in production
+    secret: process.env.SESSION_SECRET || "rice university",
     resave: true,
     saveUninitialized: false,
-    cookie: { 
-      httpOnly: true, 
+    cookie: {
+      httpOnly: true,
       secure: process.env.NODE_ENV === "production", // Use secure cookies only in production
       sameSite: "none", // Required for cross-site cookies
     },
@@ -39,10 +39,23 @@ app.use(
 );
 
 // Configure CORS to allow credentials and the frontend origin
+const allowedOrigins = [
+  process.env.FRONTEND_URL,
+  "http://localhost:3000",
+  "https://cw206ricebook-v1.surge.sh"
+].filter(Boolean);
+
 app.use(
   cors({
-    origin: "https://cw206ricebook-v1.surge.sh", // Replace with your frontend URL in production
-    // origin: "http://localhost:3000", // Allow requests from the React app
+    origin: function (origin, callback) {
+      // Allow requests with no origin (like mobile apps or curl requests)
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true, // Allow credentials (cookies) to be sent
   })
 );

@@ -1,0 +1,25 @@
+# Render Blueprint specification
+# https://render.com/docs/blueprint-spec
+
+services:
+  - type: web
+    name: ricebook-backend
+    runtime: node
+    region: oregon
+    plan: free
+    buildCommand: npm install
+    startCommand: node index.js
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3001
+      - key: MONGODB_URI
+        sync: false  # Set manually in Render dashboard
+      - key: CLOUDINARY_URL
+        sync: false  # Set manually in Render dashboard
+      - key: SESSION_SECRET
+        generateValue: true  # Auto-generate secure secret
+      - key: FRONTEND_URL
+        sync: false  # Set to your Vercel frontend URL

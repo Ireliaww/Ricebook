@@ -41,10 +41,12 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && cp-cli build/index.html build/200.html",
+    "build": "react-scripts build",
+    "build:surge": "react-scripts build && cp-cli build/index.html build/200.html",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "yarn build && cp-cli build/index.html build/200.html && surge build/"
+    "deploy:surge": "yarn build:surge && surge build/",
+    "vercel-build": "react-scripts build"
   },
   "eslintConfig": {
     "extends": [
