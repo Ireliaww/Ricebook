@@ -45,14 +45,19 @@ const allowedOrigins = [
   "https://cw206ricebook-v1.surge.sh"
 ].filter(Boolean);
 
+// Pattern to match Vercel preview deployments
+const vercelPreviewPattern = /^https:\/\/ricebook-frontend(-[a-z0-9]+)?(-erriccs-projects)?\.vercel\.app$/;
+
 app.use(
   cors({
     origin: function (origin, callback) {
       // Allow requests with no origin (like mobile apps or curl requests)
       if (!origin) return callback(null, true);
-      if (allowedOrigins.indexOf(origin) !== -1) {
+      // Allow if in static list or matches Vercel preview pattern
+      if (allowedOrigins.indexOf(origin) !== -1 || vercelPreviewPattern.test(origin)) {
         callback(null, true);
       } else {
+        console.log("Blocked origin:", origin, "Allowed:", allowedOrigins);
         callback(new Error("Not allowed by CORS"));
       }
     },
