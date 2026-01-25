@@ -2,6 +2,31 @@
 
 A full-stack social media application built with the MERN stack (MongoDB, Express.js, React, Node.js). Ricebook allows users to share posts, follow other users, comment on content, and manage their profiles.
 
+## Table of Contents
+
+- [Live Demo](#live-demo)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Environment Variables](#environment-variables)
+  - [Installation](#installation)
+  - [Running the Application](#running-the-application)
+- [API Endpoints](#api-endpoints)
+  - [Authentication](#authentication)
+  - [Articles/Posts](#articlesposts)
+  - [Profile](#profile)
+  - [Following](#following)
+- [Testing](#testing)
+  - [Frontend Tests](#frontend-tests)
+  - [Backend Tests](#backend-tests)
+- [Deployment](#deployment)
+  - [Frontend (Vercel)](#frontend-vercel)
+  - [Backend (Render)](#backend-render)
+  - [Alternative: Surge (Frontend)](#alternative-surge-frontend)
+- [Contributing](#contributing)
+- [License](#license)
 ## Live Demo
 
 | Service | URL |
